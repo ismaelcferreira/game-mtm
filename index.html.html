@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Trilha Trigonométrica</title>
+<style>
+:root{
+  --navy:#0b2a4a;--blue:#4aa3df;--ice:#eaf4fc;--bg:#f6fafe;--card:#fff;--text:#12263f;--muted:#4d6580;--orange:#ff8a1f;--line:#cfe3f3;
+  --easy:#2e9e6b;--mid:#2f7fd1;--hard:#e0701a;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1626;--card:#10253d;--text:#e8f2fb;--muted:#a3b9cf;--line:#21405f;--ice:#12304e}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Nunito","Segoe UI",system-ui,sans-serif;line-height:1.6}
+h1,h2,h3{font-family:"Poppins","Segoe UI",system-ui,sans-serif;line-height:1.2;margin:0}
+section{padding:64px 20px;max-width:980px;margin:0 auto}
+h2{font-size:clamp(1.6rem,4vw,2.1rem);color:var(--navy);margin-bottom:8px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) h2{color:#fff}}
+.lead{color:var(--muted);margin:0 0 28px;max-width:60ch}
+.btn{display:inline-block;border:0;border-radius:999px;padding:14px 30px;font:700 1rem inherit;font-family:inherit;cursor:pointer;background:var(--orange);color:#1a1000;text-decoration:none;transition:transform .2s,box-shadow .2s;box-shadow:0 6px 18px rgba(255,138,31,.35)}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.btn.small{padding:10px 20px;font-size:.9rem;box-shadow:none;background:var(--navy);color:#fff}
+.hero{background:linear-gradient(160deg,#0b2a4a 0%,#12457a 70%,#2478b8 100%);color:#fff;max-width:none;padding:72px 20px 80px;text-align:center;position:relative;overflow:hidden}
+.hero-in{max-width:760px;margin:0 auto;position:relative}
+.hero h1{font-size:clamp(2.2rem,8vw,4rem);letter-spacing:.02em;margin:18px 0 12px}
+.hero .sub{font-size:1.2rem;color:#bfe0f7;margin:0 0 14px}
+.hero p{color:#dcecf8;max-width:56ch;margin:0 auto 30px}
+.hero svg.logo{width:130px;height:130px}
+.spin{transform-origin:100px 100px;animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}html{scroll-behavior:auto}.card,.btn{transition:none}}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px}
+.box h3{font-size:1.05rem;color:var(--navy);margin-bottom:6px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .box h3{color:#fff}}
+.box ul{margin:0;padding-left:20px}
+.ico{font-size:1.6rem}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.steps li{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px}
+.num{flex:none;width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:800}
+.steps .ico{margin-left:auto;flex:none}
+.steps b{display:block}
+.score{background:var(--navy);color:#fff;max-width:none}
+.score .wrap{max-width:980px;margin:0 auto}
+.score h2{color:#fff}
+.sgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.s{border-radius:18px;padding:22px;text-align:center;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.2)}
+.s strong{display:block;font-size:2rem;font-family:Poppins,sans-serif}
+.s.ok{border-color:#47d18f}.s.no{border-color:#ff6b5e}.s.win{border-color:var(--orange);background:rgba(255,138,31,.18)}
+.circle-wrap{display:grid;gap:24px;align-items:center;grid-template-columns:1fr}
+@media(min-width:760px){.circle-wrap{grid-template-columns:1.1fr 1fr}}
+.circle-wrap svg{width:100%;max-width:440px;height:auto;margin:0 auto;display:block;background:var(--card);border:1px solid var(--line);border-radius:22px}
+.legend{display:grid;gap:10px}
+.legend .box{padding:14px 18px}
+.cards{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-top:8px solid var(--c);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.card.facil{--c:var(--easy)}.card.inter{--c:var(--mid)}.card.desafio{--c:var(--hard)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.cn{font-weight:800;font-family:Poppins,sans-serif}
+.tag{background:var(--c);color:#fff;border-radius:999px;padding:3px 12px;font-size:.8rem;font-weight:800}
+.q{margin:0;font-weight:600;flex:1}
+.ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s}
+.ans.open{grid-template-rows:1fr}
+.ans>div{overflow:hidden}
+.ans p{margin:0;padding:12px 14px;border-radius:12px;background:var(--ice);border-left:5px solid var(--orange);font-weight:700}
+.card .btn{align-self:flex-start}
+.final{text-align:center;padding-bottom:90px}
+.msg{margin:26px auto 0;max-width:520px;background:var(--card);border:2px solid var(--orange);border-radius:20px;padding:22px;display:none}
+.msg.show{display:block;animation:pop .35s}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:none;opacity:1}}
+.game{margin-top:18px;padding:22px}.game label{font-weight:700}.game input{width:70px;border-radius:10px;border:1px solid var(--line);padding:6px;font:inherit;background:var(--bg);color:var(--text)}
+.track{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0}
+.cell{width:44px;height:50px;border:1px solid var(--line);border-radius:10px;background:var(--ice);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.7rem;font-weight:800}
+.cell.end{background:var(--orange);color:#1a1000}
+.pw{font-size:1rem;line-height:1}.p1{color:#ff8a1f}.p2{color:#1f6fd1}
+.turn{font-weight:800;font-size:1.1rem;margin:0 0 12px}
+.gbtns{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+.gcard{margin-top:14px;border:1px solid var(--line);border-top:8px solid var(--c,var(--mid));border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.gcard[hidden],#gres[hidden]{display:none}
+.gcard .tag{background:var(--c,var(--mid))}
+.btn.ok{background:#2e9e6b;color:#fff;box-shadow:none}.btn.no{background:#d9483b;color:#fff;box-shadow:none}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+footer{text-align:center;color:var(--muted);padding:0 20px 30px;font-size:.85rem}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <svg class="logo" viewBox="0 0 200 200" aria-hidden="true">
+      <circle cx="100" cy="100" r="84" fill="none" stroke="#9fd3f5" stroke-width="4"/>
+      <line x1="8" y1="100" x2="192" y2="100" stroke="#9fd3f5" stroke-width="2"/>
+      <line x1="100" y1="8" x2="100" y2="192" stroke="#9fd3f5" stroke-width="2"/>
+      <g class="spin"><line x1="100" y1="100" x2="160" y2="40" stroke="#ff8a1f" stroke-width="5" stroke-linecap="round"/><circle cx="160" cy="40" r="8" fill="#ff8a1f"/></g>
+    </svg>
+    <h1>TRILHA TRIGONOMÉTRICA</h1>
+    <p class="sub">Aprenda sobre o ciclo trigonométrico enquanto se diverte!</p>
+    <p>Bem-vindo à Trilha Trigonométrica! Um jogo de tabuleiro para duas pessoas, desenvolvido para testar seus conhecimentos sobre ângulos, quadrantes e funções trigonométricas.</p>
+    <a class="btn" href="#sobre">CONHECER O JOGO</a>
+  </div>
+</header>
+
+<section id="sobre">
+  <h2>Sobre o jogo</h2>
+  <p class="lead">Tudo o que você precisa saber antes de começar.</p>
+  <div class="grid">
+    <div class="box"><div class="ico">🏁</div><h3>Objetivo</h3><p>Ser o primeiro jogador a chegar ao final do tabuleiro, respondendo corretamente às perguntas sobre o ciclo trigonométrico.</p></div>
+    <div class="box"><div class="ico">👥</div><h3>Jogadores</h3><p>2 pessoas.</p></div>
+    <div class="box"><div class="ico">🎲</div><h3>Materiais necessários</h3>
+      <ul><li>Tabuleiro físico</li><li>Círculo trigonométrico</li><li>Seta móvel</li><li>Cartinhas com perguntas</li><li>Dois peões</li></ul></div>
+  </div>
+</section>
+
+<section id="como-jogar">
+  <h2>Como jogar</h2>
+  <p class="lead">Siga as etapas, uma de cada vez.</p>
+  <ol class="steps">
+    <li><span class="num">1</span><div><b>Posicione os peões</b>Os dois jogadores colocam seus peões na casa inicial.</div><span class="ico">♟️</span></li>
+    <li><span class="num">2</span><div><b>Sorteie uma cartinha</b>O primeiro jogador sorteia uma cartinha com uma pergunta.</div><span class="ico">🃏</span></li>
+    <li><span class="num">3</span><div><b>Leia e responda</b>Ele lê e responde à pergunta, podendo consultar o círculo trigonométrico que fica no centro do tabuleiro.</div><span class="ico">💬</span></li>
+    <li><span class="num">4</span><div><b>Use a seta móvel</b>A seta móvel pode ser utilizada para apontar a posição do ângulo no círculo.</div><span class="ico">🧭</span></li>
+    <li><span class="num">5</span><div><b>Avance ou volte</b>Se acertar, avança 2 casas. Se errar, volta 1 casa.</div><span class="ico">↔️</span></li>
+    <li><span class="num">6</span><div><b>Passe a vez</b>Depois, é a vez do outro jogador.</div><span class="ico">🔁</span></li>
+    <li><span class="num">7</span><div><b>Vença o jogo</b>Vence quem chegar primeiro à última casa do tabuleiro.</div><span class="ico">🏆</span></li>
+  </ol>
+</section>
+
+<section class="score" id="pontuacao" style="padding:0">
+  <div class="wrap" style="padding:64px 20px">
+    <h2>Pontuação</h2>
+    <p class="lead" style="color:#bfe0f7">O que acontece depois de cada resposta.</p>
+    <div class="sgrid">
+      <div class="s ok"><strong>+2</strong>Resposta correta: avance 2 casas.</div>
+      <div class="s no"><strong>−1</strong>Resposta incorreta: volte 1 casa.</div>
+      <div class="s win"><strong>🏆</strong>Chegou ao final primeiro: venceu a partida!</div>
+    </div>
+  </div>
+</section>
+
+<section id="ciclo">
+  <h2>Ciclo trigonométrico e jogo</h2>
+  <p class="lead">Arraste a seta móvel no centro do círculo para apontar um ângulo. Abaixo, jogue com as cartinhas.</p>
+  <div class="circle-wrap">
+    <svg id="cic" style="touch-action:none;cursor:grab" viewBox="0 0 400 400" role="img" aria-label="Ciclo trigonométrico com quatro quadrantes, ângulos de 0, 90, 180 e 270 graus e sentido anti-horário">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#ff8a1f"/></marker>
+        <marker id="ax" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4aa3df"/></marker>
+      </defs>
+      <g font-family="Segoe UI,system-ui,sans-serif" text-anchor="middle">
+        <circle cx="200" cy="200" r="120" fill="#4aa3df" fill-opacity=".1" stroke="#0b2a4a" stroke-width="3"/>
+        <line x1="40" y1="200" x2="368" y2="200" stroke="#4aa3df" stroke-width="2.5" marker-end="url(#ax)"/>
+        <line x1="200" y1="360" x2="200" y2="32" stroke="#4aa3df" stroke-width="2.5" marker-end="url(#ax)"/>
+        <g fill="#0b2a4a" stroke="none"><circle cx="320" cy="200" r="5"/><circle cx="200" cy="80" r="5"/><circle cx="80" cy="200" r="5"/><circle cx="200" cy="320" r="5"/></g>
+        <path d="M 245 200 A 45 45 0 0 0 200 155" fill="none" stroke="#ff8a1f" stroke-width="3.5" marker-end="url(#ah)" transform="translate(0,0)"/>
+        <g font-size="16" font-weight="800" fill="#0b2a4a">
+          <text x="344" y="190">0°</text><text x="200" y="68">90°</text><text x="56" y="190">180°</text><text x="200" y="344">270°</text>
+        </g>
+        <g font-size="14" font-weight="700" fill="#2f6ea3">
+          <text x="383" y="222">eixo horizontal</text>
+          <text x="200" y="22">eixo vertical</text>
+        </g>
+        <g font-size="22" font-weight="800" fill="#ff8a1f">
+          <text x="265" y="145">1º</text><text x="135" y="145">2º</text><text x="135" y="270">3º</text><text x="265" y="270">4º</text>
+        </g>
+        <text x="200" y="196" font-size="12" font-weight="700" fill="#4d6580" dy="-52" transform="translate(0,0)" style="display:none"></text>
+        <text x="262" y="176" font-size="11" font-weight="700" fill="#c25e00">sentido +</text>
+        <g id="arrow" transform="rotate(0 200 200)"><line x1="200" y1="200" x2="296" y2="200" stroke="#ff8a1f" stroke-width="7" stroke-linecap="round"/><polygon points="322,200 292,186 292,214" fill="#ff8a1f" stroke="#fff" stroke-width="2"/><circle cx="200" cy="200" r="9" fill="#0b2a4a" stroke="#fff" stroke-width="2"/></g>
+      </g>
+    </svg>
+    <div class="legend">
+      <div class="box"><h3>Quadrantes</h3><p>1º: de 0° a 90° · 2º: de 90° a 180° · 3º: de 180° a 270° · 4º: de 270° a 360°.</p></div>
+      <div class="box"><h3>Eixos</h3><p>O eixo horizontal passa por 0° e 180°. O eixo vertical passa por 90° e 270°.</p></div>
+      <div class="box"><h3>Sentido positivo</h3><p>Os ângulos crescem no sentido anti-horário, a partir de 0°.</p></div>
+      <div class="box"><h3>Volta completa</h3><p>Uma volta completa equivale a 360°.</p></div>
+    </div>
+  </div>
+<div class="box" style="margin-top:18px;text-align:center"><h3>Posição da seta</h3><p id="read" style="margin:4px 0 0;font-weight:800;font-size:1.2rem;color:var(--orange)">0° — sobre o eixo horizontal (0°)</p></div>
+
+<div class="box game" id="jogo">
+  <h3 style="font-size:1.3rem">Jogar agora</h3>
+  <p class="lead" style="margin-bottom:12px">Para 2 jogadores. Sorteie uma cartinha, responda (use a seta se quiser) e confira a resposta.</p>
+  <label>Número de casas do seu tabuleiro: <input id="gN" type="number" min="4" max="60" value="20"></label>
+  <div class="track" id="gtrack"></div>
+  <p class="turn" id="gturn"></p>
+  <div class="gbtns"><button class="btn" id="gdraw" type="button">SORTEAR CARTINHA</button><button class="btn small" id="gnew" type="button">NOVO JOGO</button></div>
+  <div class="gcard" id="gcard" hidden>
+    <div class="top"><span class="cn" id="gcnum"></span><span class="tag" id="gclvl"></span></div>
+    <p class="q" id="gq"></p>
+    <div class="ans" id="gans"><div><p id="ga"></p></div></div>
+    <button class="btn small" id="greveal" type="button">VER RESPOSTA</button>
+    <div class="gbtns" id="gres" hidden><button class="btn ok" id="gok" type="button">ACERTOU: AVANÇA 2</button><button class="btn no" id="gno" type="button">ERROU: VOLTA 1</button></div>
+  </div>
+</div>
+</section>
+
+<section id="cartinhas">
+  <h2>Conheça as cartinhas</h2>
+  <p class="lead">Tente responder primeiro. Depois, toque em “Ver resposta” para conferir.</p>
+  <div class="cards" id="cards"></div>
+</section>
+
+<section class="final" id="final">
+  <h2>Agora que você conhece as regras, está preparado para jogar?</h2>
+  <p class="lead" style="margin:12px auto 26px">Pegue o tabuleiro, os peões e as cartinhas.</p>
+  <button class="btn" id="play" type="button">VAMOS JOGAR!</button>
+  <div class="msg" id="msg" role="status" aria-live="polite">
+    <h3>🎉 Boa partida!</h3>
+    <p>Posicionem os peões na casa inicial, sorteiem a primeira cartinha e comecem o jogo no tabuleiro físico. Que vença o melhor!</p>
+  </div>
+</section>
+
+<footer>Trilha Trigonométrica · Projeto escolar</footer>
+
+<script>
+var cartas=[
+ ["1","Fácil","facil","Qual é o ângulo que fica na parte superior do ciclo trigonométrico?","90 graus."],
+ ["2","Fácil","facil","Em qual quadrante está localizado o ângulo de 45 graus?","1º quadrante."],
+ ["3","Fácil","facil","Qual é o ângulo que fica na parte esquerda do ciclo trigonométrico?","180 graus."],
+ ["4","Intermediária","inter","Em qual quadrante está localizado o ângulo de 150 graus?","2º quadrante."],
+ ["5","Intermediária","inter","Qual é o ângulo que fica na parte inferior do ciclo trigonométrico?","270 graus."],
+ ["6","Intermediária","inter","Em qual quadrante está localizado o ângulo de 225 graus?","3º quadrante."],
+ ["7","Desafio","desafio","Se você estiver no ângulo de 90 graus e der uma volta completa no ciclo trigonométrico, em qual ângulo chegará?","450 graus, que equivale a 90 graus no ciclo."],
+ ["8","Desafio","desafio","Qual é o valor do seno de 30 graus?","0,5."],
+ ["9","Desafio","desafio","Qual é o valor do cosseno de 60 graus?","0,5."],
+ ["10","Desafio","desafio","Em qual quadrante está localizado o ângulo de 315 graus?","4º quadrante."]
+];
+var box=document.getElementById("cards");
+cartas.forEach(function(c,i){
+  var d=document.createElement("article");
+  d.className="card "+c[2];
+  d.innerHTML='<div class="top"><span class="cn">Carta '+c[0]+'</span><span class="tag">'+c[1]+'</span></div>'+
+  '<p class="q">'+c[3]+'</p>'+
+  '<div class="ans" id="a'+i+'"><div><p>'+c[4]+'</p></div></div>'+
+  '<button class="btn small" type="button" aria-expanded="false" aria-controls="a'+i+'">VER RESPOSTA</button>';
+  var b=d.querySelector("button"),a=d.querySelector(".ans");
+  b.addEventListener("click",function(){
+    var o=a.classList.toggle("open");
+    b.textContent=o?"ESCONDER RESPOSTA":"VER RESPOSTA";
+    b.setAttribute("aria-expanded",o);
+  });
+  box.appendChild(d);
+});
+var svg=document.getElementById("cic"),arr=document.getElementById("arrow"),rd=document.getElementById("read"),drag=false;
+function setAng(a){var g=((Math.round(a)%360)+360)%360;arr.setAttribute("transform","rotate("+(-g)+" 200 200)");
+  var t=g%90===0?["sobre o eixo horizontal","sobre o eixo vertical","sobre o eixo horizontal","sobre o eixo vertical"][g/90]:(Math.floor(g/90)+1)+"º quadrante";
+  rd.textContent=g+"° — "+t;}
+function fromEvt(e){var r=svg.getBoundingClientRect();setAng(Math.atan2(200-(e.clientY-r.top)/r.height*400,(e.clientX-r.left)/r.width*400-200)*180/Math.PI);}
+svg.addEventListener("pointerdown",function(e){drag=true;svg.setPointerCapture(e.pointerId);svg.style.cursor="grabbing";fromEvt(e);});
+svg.addEventListener("pointermove",function(e){if(drag)fromEvt(e);});
+svg.addEventListener("pointerup",function(){drag=false;svg.style.cursor="grab";});
+svg.addEventListener("pointercancel",function(){drag=false;});
+
+var $=function(i){return document.getElementById(i)},N=20,pos=[0,0],turn=0,deck=[],cur=null,over=false;
+function shuffle(){deck=cartas.map(function(_,i){return i});for(var i=deck.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=deck[i];deck[i]=deck[j];deck[j]=t;}}
+function render(){var h="";for(var i=0;i<=N;i++){var p="";if(pos[0]===i)p+='<span class="pw p1" title="Jogador 1">●</span>';if(pos[1]===i)p+='<span class="pw p2" title="Jogador 2">●</span>';
+  h+='<div class="cell'+(i===N?' end':'')+'">'+(i===0?'Início':i===N?'Fim':i)+p+'</div>';}
+  $("gtrack").innerHTML=h;
+  $("gturn").textContent=over?"🏆 Jogador "+(turn+1)+" venceu a partida!":"Vez do Jogador "+(turn+1)+(turn?" (azul)":" (laranja)");
+  $("gdraw").disabled=over||!!cur;}
+function newGame(){N=Math.max(4,Math.min(60,parseInt($("gN").value)||20));$("gN").value=N;pos=[0,0];turn=0;over=false;cur=null;shuffle();$("gcard").hidden=true;render();}
+$("gnew").addEventListener("click",newGame);
+$("gN").addEventListener("change",newGame);
+$("gdraw").addEventListener("click",function(){if(!deck.length)shuffle();cur=cartas[deck.pop()];var c=$("gcard");c.style.setProperty("--c",cur[2]==="facil"?"var(--easy)":cur[2]==="inter"?"var(--mid)":"var(--hard)");
+  $("gcnum").textContent="Carta "+cur[0];$("gclvl").textContent=cur[1];$("gq").textContent=cur[3];$("ga").textContent=cur[4];
+  $("gans").classList.remove("open");$("greveal").textContent="VER RESPOSTA";$("gres").hidden=true;c.hidden=false;render();c.scrollIntoView({behavior:"smooth",block:"nearest"});});
+$("greveal").addEventListener("click",function(){var o=$("gans").classList.toggle("open");this.textContent=o?"ESCONDER RESPOSTA":"VER RESPOSTA";$("gres").hidden=!o;});
+function resolve(ok){if(!cur)return;pos[turn]=ok?Math.min(N,pos[turn]+2):Math.max(0,pos[turn]-1);cur=null;$("gcard").hidden=true;
+  if(pos[turn]>=N){over=true;}else{turn=1-turn;}render();}
+$("gok").addEventListener("click",function(){resolve(true)});
+$("gno").addEventListener("click",function(){resolve(false)});
+newGame();
+
+document.getElementById("play").addEventListener("click",function(){
+  var m=document.getElementById("msg");m.classList.add("show");
+  m.scrollIntoView({behavior:"smooth",block:"center"});
+});
+</script>
+</body>
+</html>
